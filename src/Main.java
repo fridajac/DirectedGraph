@@ -14,20 +14,26 @@ public class Main {
         ArrayList<String> words13 = readDataFromFile("src/TestFiles/words-13-data.txt");
         Digraph digraph13 = new Digraph(words13);
         System.out.println("Test 1. 13 words:");
-        readFromTestFile(digraph13, "src/TestFiles/words-13-test.txt");
+        if(readFromTestFile(digraph13, "src/TestFiles/words-13-test.txt", "src/TestFiles/words-13-output-bfs.txt")){
+            System.out.println("Test 1 OK");
+        }
 
         System.out.println("Test 2: 250 words:");
         ArrayList<String> words250 = readDataFromFile("src/TestFiles/words-250-data.txt");
         Digraph digraph250 = new Digraph(words250);
-        readFromTestFile(digraph250, "src/TestFiles/words-250-test.txt");
+        if(readFromTestFile(digraph250, "src/TestFiles/words-250-test.txt", "src/TestFiles/words-250-output-bfs.txt")){
+            System.out.println("Test 2 OK");
+        }
 
         System.out.println("Test 3: 5757 words");
         ArrayList<String> words5757 = readDataFromFile("src/TestFiles/words-5757-data.txt");
         Digraph digraph5757 = new Digraph(words5757);
-        readFromTestFile(digraph5757, "src/TestFiles/words-5757-test.txt");
+        if(readFromTestFile(digraph5757, "src/TestFiles/words-5757-test.txt", "src/TestFiles/words-5757-output-bfs.txt")){
+            System.out.println("Test 3 OK");
+        }
     }
 
-    public static ArrayList<String> readDataFromFile(String filename) throws IOException {
+    private static ArrayList<String> readDataFromFile(String filename) throws IOException {
         BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         ArrayList<String> words = new ArrayList<String>();
         while (true) {
@@ -41,10 +47,13 @@ public class Main {
         return words;
     }
 
-    public static void readFromTestFile(Digraph digraph, String path) throws IOException {
-        BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+    private static boolean readFromTestFile(Digraph digraph, String path, String outputPath) throws IOException {
+        boolean testOK = true;
+        BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+        BufferedReader outputReader = new BufferedReader(new InputStreamReader(new FileInputStream(outputPath)));
         while (true) {
-            String line = r.readLine();
+            String line = fileReader.readLine();
+            String answer = outputReader.readLine();
             if (line == null) {
                 break;
             }
@@ -55,7 +64,12 @@ public class Main {
             int startNode = digraph.getNodePosition(start);
             int goalNode = digraph.getNodePosition(goal);
             BreadthFirstDirectedPaths bfs = new BreadthFirstDirectedPaths(digraph, startNode);
-            System.out.println(bfs.distTo(goalNode));
+            int distTo = bfs.distTo(goalNode);
+            System.out.println(distTo);
+            if (distTo != Integer.parseInt(answer)) {
+                testOK = false;
+            }
         }
+        return testOK;
     }
 }
