@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/*
+Author: Benny Pettersoson, Frida Jacobsson
+DA29DA
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -11,24 +15,24 @@ public class Main {
     }
 
     private static void runTests() throws IOException {
-        ArrayList<String> words13 = readDataFromFile("src/TestFiles/words-13-data.txt");
+        ArrayList<String> words13 = readDataFromFile("src/words-13-data.txt");
         Digraph digraph13 = new Digraph(words13);
         System.out.println("Test 1. 13 words:");
-        if(readFromTestFile(digraph13, "src/TestFiles/words-13-test.txt", "src/TestFiles/words-13-output-bfs.txt")){
+        if(readFromTestFile(digraph13, "src/words-13-test.txt", "src/words-13-output-bfs.txt")){
             System.out.println("Test 1 OK");
         }
 
         System.out.println("Test 2: 250 words:");
-        ArrayList<String> words250 = readDataFromFile("src/TestFiles/words-250-data.txt");
+        ArrayList<String> words250 = readDataFromFile("src/words-250-data.txt");
         Digraph digraph250 = new Digraph(words250);
-        if(readFromTestFile(digraph250, "src/TestFiles/words-250-test.txt", "src/TestFiles/words-250-output-bfs.txt")){
+        if(readFromTestFile(digraph250, "src/words-250-test.txt", "src/words-250-output-bfs.txt")){
             System.out.println("Test 2 OK");
         }
 
         System.out.println("Test 3: 5757 words");
-        ArrayList<String> words5757 = readDataFromFile("src/TestFiles/words-5757-data.txt");
+        ArrayList<String> words5757 = readDataFromFile("src/words-5757-data.txt");
         Digraph digraph5757 = new Digraph(words5757);
-        if(readFromTestFile(digraph5757, "src/TestFiles/words-5757-test.txt", "src/TestFiles/words-5757-output-bfs.txt")){
+        if(readFromTestFile(digraph5757, "src/words-5757-test.txt", "src/words-5757-output-bfs.txt")){
             System.out.println("Test 3 OK");
         }
     }
